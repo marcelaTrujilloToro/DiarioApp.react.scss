@@ -1,10 +1,9 @@
-import React from 'react'
+import React from 'react';
+import { AppRouter } from './routers/AppRouter';
 
  const DiarioApp = () => {
     return (
-        <div>
-            <h1>Diario app</h1>
-        </div>
+        <AppRouter/>
     )
 };
 export default DiarioApp;
