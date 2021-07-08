@@ -1,0 +1,87 @@
+.diario__main-content{
+    display: flex;
+}
+
+.diario__sidebar{
+    background-color: $dark-grey;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 450px;
+}
+
+.diario__sidebar-navbar{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.diario__sidebar-navbar h3 {
+    font-weight: lighter;
+}
+
+.diario__nueva-entrada{
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 30px;
+    width: 100%;
+
+    transition: color .3s ease;
+
+    &:hover{
+        color: darken($color: white, $amount: 20);
+    }
+}
+
+.diario__entradas{
+    flex: 1 1 auto;
+    margin-top: 30px;
+    overflow-y: scroll;
+    
+}
+
+.diario__entrada{
+    background-color: white;
+    border-radius: 4px;
+    color: $dark-grey;
+    display: flex;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.diario__entrada-imagen{
+    height: 75px;
+    width: 75px;
+}
+
+.diario__entrada-body{
+    padding: 10px;
+
+}
+
+.diario__entrada-titulo{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.diario__entrada-contenido{
+    font-size: 10px;
+}
+
+.diario__fecha{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+}
+
+.diario__fecha span{
+    font-size: 12px;
+}

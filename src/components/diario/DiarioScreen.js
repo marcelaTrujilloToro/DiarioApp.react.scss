@@ -1,9 +1,16 @@
-import React from 'react'
+import React from 'react';
+import { Sidebar } from './Sidebar';
 
 const DiarioScreen = () => {
     return (
-        <div>
-            <h1>Diario screen</h1>
+        <div className="diario__main-content">
+            
+            <Sidebar/>
+
+            <main>
+                <h1>main content</h1>
+            </main>
+
         </div>
     )
 };
