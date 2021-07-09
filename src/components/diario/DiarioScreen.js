@@ -1,5 +1,7 @@
 import React from 'react';
+import { NotaScreen } from '../notas/NotaScreen';
 import { Sidebar } from './Sidebar';
+// import { NadaSeleccionado } from './NadaSeleccionado';
 
 const DiarioScreen = () => {
     return (
@@ -8,7 +10,8 @@ const DiarioScreen = () => {
             <Sidebar/>
 
             <main>
-                <h1>main content</h1>
+                {/* <NadaSeleccionado/> */}
+                <NotaScreen/>
             </main>
 
         </div>
