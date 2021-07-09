@@ -1,23 +1,70 @@
 import React from "react";
-import {Link} from 'react-router-dom';
+import {useDispatch} from 'react-redux'
+import { Link } from "react-router-dom";
+import { useForm } from "../../hooks/useForm";
+import {inicioGoogleLogin, inicioLoginEmailContraseña} from '../../acciones/auth';
 
 const LoginScreen = () => {
+
+  //hook de redux:  darle acceso al dispatch de acciones en cualquier lugar
+  const dispatch = useDispatch();
+  
+  const [values, handleInputChange, reset] = useForm({
+    correo: "marces.ttblue@gmail.com",
+    contraseña: "123456",
+  });
+
+  const { correo, contraseña } = values;
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    dispatch(inicioLoginEmailContraseña(correo, contraseña));
+    
+  }
+
+  const handleGoogleLogin = (e) => {
+    
+    dispatch(inicioGoogleLogin());
+    
+  }
+
+
+
   return (
     <>
       <h3 className="auth__titulo">Iniciar sesión</h3>
 
-      <form>
-        <input type="text" placeholder="Email" name="email" className="auth__input" autoComplete="off"></input>
-        <input type="password" placeholder="Password" name="password" className="auth__input" autoComplete="off"></input>
+      <form onSubmit={handleLogin}>
+        <input
+          type="text"
+          placeholder="Correo"
+          name="correo"
+          className="auth__input"
+          autoComplete="off"
+          value={correo}
+          onChange={handleInputChange}
+        ></input>
+        <input
+          type="password"
+          placeholder="Contraseña"
+          name="contraseña"
+          className="auth__input"
+          autoComplete="off"
+          value={contraseña}
+          onChange={handleInputChange}
+        ></input>
 
-        <button type="submit" className="btn btn-primary btn-block">Acceder</button>
-    
+        <button type="submit" className="btn btn-primary btn-block">
+          Acceder
+        </button>
 
         <div className="auth__red-social">
-
           <p>Acceso con tu red social</p>
 
-          <div className="google-btn">
+          <div 
+            className="google-btn"
+            onClick={handleGoogleLogin}
+            >
             <div className="google-icon-wrapper">
               <img
                 className="google-icon"
@@ -32,7 +79,7 @@ const LoginScreen = () => {
         </div>
 
         <Link className="link" to="/auth/registro">
-            Crear una cuenta nueva
+          Crear una cuenta nueva
         </Link>
       </form>
     </>
