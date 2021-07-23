@@ -4,6 +4,10 @@ import LoginScreen from '../components/auth/LoginScreen';
 import RegistroScreen from '../components/auth/RegistroScreen';
 
 export const AuthRouter = () => {
+
+
+    
+
     return (
         <div className="auth__main" >
             <div className="auth__box-container">

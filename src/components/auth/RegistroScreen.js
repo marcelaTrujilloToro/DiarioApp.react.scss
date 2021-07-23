@@ -1,103 +1,125 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import validator from 'validator'
-import { useForm } from "../../hooks/useForm";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector} from 'react-redux';
+import validator from 'validator';
 
-const RegistroScreen = () => {
+import { useForm } from '../../hooks/useForm';
+import { setError, removeError } from '../../acciones/ui';
+import { startRegisterWithEmailPasswordName } from '../../acciones/auth';
 
-  const [values, handleInputChange, reset] = useForm({
-    nombre: 'Marcela Trujillo Toro',
-    correo: "marces.ttblue@gmail.com",
-    contraseña: "123456",
-    contraseña2: '123456'
-  });
+export const RegistroScreen = () => {
 
-  const { nombre, correo, contraseña, contraseña2 } = values;
+    const dispatch = useDispatch();
+    const { msgError } = useSelector( state => state.ui );
 
-  const handleLogin = (e) => {
-    e.preventDefault();
+    const [ formValues, handleInputChange ] = useForm({
+        name: 'Marcela Trujillo Toro',
+        email: 'marces@gmail.com',
+        password: '123456',
+        password2: '123456',
+    });
 
-    if (validarFormulario()) {
-      console.log("formulario ok");
-    };
-    
-  };
+    const { name ,email ,password ,password2 } = formValues;
 
-  const validarFormulario = () => {
+    const handleRegister = (e) => {
+        e.preventDefault();
 
-    if (nombre.trim().length === 0) {
-      console.log("nombre es requerido");
-      return false;
+        if ( isFormValid() ) {
+            dispatch( startRegisterWithEmailPasswordName(email, password, name) );
+        }
 
-    }else if (!validator.isEmail (correo)) {
-      console.log("Correo no valido")
-      return false;
-    
-    }else if (contraseña !== contraseña2 || contraseña.length < 5) {
-      console.log("la contr")
-      return false;
     }
 
-    return true;
-  };
+    const isFormValid = () => {
+        
+        if ( name.trim().length === 0 ) {
+            dispatch( setError('Name is required') )
+            return false;
+        } else if ( !validator.isEmail( email ) ) {
+            dispatch( setError('Email is not valid') )
+            return false;
+        } else if ( password !== password2 || password.length < 5 ) {
+            dispatch( setError('Password should be at least 6 characters and match each other') )
+            return false
+        }
+        
+        dispatch( removeError() );
+       return true;
+    }
+
+    return (
+        <>
+            <h3 className="auth__title">Register</h3>
+
+            <form onSubmit={ handleRegister }>
+
+                {
+                    msgError &&
+                    (
+                        <div className="auth__alert-error">
+                            { msgError }
+                        </div>
+                    )
+                }
 
 
-  return (
-    <>
-      <h3 className="auth__titulo">Registro nuevo usuario</h3>
+                <input 
+                    type="text"
+                    placeholder="Name"
+                    name="name"
+                    className="auth__input"
+                    autoComplete="off"
+                    value={ name }
+                    onChange={ handleInputChange }
+                />
 
-      <form onSubmit={handleLogin}>
+                <input 
+                    type="text"
+                    placeholder="Email"
+                    name="email"
+                    className="auth__input"
+                    autoComplete="off"
+                    value={ email }
+                    onChange={ handleInputChange }
+                />
 
-        <div className="auth__alerta-error">
-          Hola mundo
-        </div>
+                <input 
+                    type="password"
+                    placeholder="Password"
+                    name="password"
+                    className="auth__input"
+                    value={ password }
+                    onChange={ handleInputChange }
+                />
 
-        <input
-          type="text"
-          placeholder="Nombre"
-          name="nombre"
-          className="auth__input"
-          autoComplete="off"
-          value={nombre}
-          onChange={handleInputChange}
-        ></input>
-        <input
-          type="text"
-          placeholder="Correo"
-          name="correo"
-          className="auth__input"
-          autoComplete="off"
-          value={correo}
-          onChange={handleInputChange}
-        ></input>
-        <input
-          type="password"
-          placeholder="Contraseña"
-          name="contraseña"
-          className="auth__input"
-          autoComplete="off"
-          value={contraseña}
-          onChange={handleInputChange}
-        ></input>
-        <input
-          type="password"
-          placeholder="Confirmar contraseña"
-          name="contraseña2"
-          className="auth__input"
-          autoComplete="off"
-          value={contraseña2}
-          onChange={handleInputChange}
-        ></input>
+                <input 
+                    type="password"
+                    placeholder="Confirm password"
+                    name="password2"
+                    className="auth__input"
+                    value={ password2 }
+                    onChange={ handleInputChange }
+                />
 
-        <button type="submit" className="btn btn-primary btn-block mb-5">
-          Registrarse
-        </button>
 
-        <Link className="link" to="/auth/login">
-          Ya estas registrado?
-        </Link>
-      </form>
-    </>
-  );
+                <button
+                    type="submit"
+                    className="btn btn-primary btn-block mb-5"
+                >
+                    Register
+                </button>
+
+               
+
+                <Link 
+                    to="/auth/login"
+                    className="link"
+                >
+                    Already registered?
+                </Link>
+
+            </form>
+        </>
+    )
 };
 export default RegistroScreen;

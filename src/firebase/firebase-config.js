@@ -1,4 +1,3 @@
-
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
@@ -14,15 +13,18 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
+//base de datos
 firebase.initializeApp(firebaseConfig);
 
-//base de datos
+//referencia a fireStore
 const db = firebase.firestore();
 
+//provider para hacer la autenticacion con google
 const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
+
 export {
-    db, 
+    db,
     googleAuthProvider,
     firebase
 }
