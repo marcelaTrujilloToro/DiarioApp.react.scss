@@ -1,25 +1,48 @@
-import React from 'react'
+import React from 'react';
+import moment from 'moment';
+import { useDispatch } from 'react-redux';
+import { activarNota } from '../../acciones/notas';
 
-export const DiarioEntrada = () => {
+export const DiarioEntrada = ({id, fecha, titulo, cuerpo, url}) => {
+
+    const fechaNota = moment(fecha);
+    const dispatch = useDispatch();
+
+    const handleEntradaClick = () => {
+        dispatch(activarNota(id, {
+            fecha, titulo, cuerpo, url
+        }))
+    }
+    
+
     return (
-        <div className="diario__entrada pointer">
+        <div 
+            className="diario__entrada pointer"
+            onClick={handleEntradaClick }    
+        >
+
+           { 
+                url &&
+                <div 
+                    className="diario__entrada-imagen" 
+                    style={{
+                        backgroundSize: 'cover',
+                        backgroundImage: `url(${url})`
+                    }}>
+
+                </div>
+            
+            }
+
             <div 
-                className="diario__entrada-imagen" 
-                style={{
-                    backgroundSize: 'cover',
-                    backgroundImage: 'url(https://as.com/epik/imagenes/2021/01/12/portada/1610475996_695462_1610476105_sumario_normal.jpg)'
-                }}>
-
-            </div>
-
-            <div className="diario__entrada-body">
-                <p className="diario__entrada-titulo">Un nuevo dia</p>
-                <p className="diario__entrada-contenido">asdfadf asdfadsfafasdf adsdfsd fgerf</p>
+                className="diario__entrada-body">
+                <p className="diario__entrada-titulo">{titulo}</p>
+                <p className="diario__entrada-contenido">{cuerpo}</p>
             </div>
 
             <div className="diario__fecha">
-                <span>Sabado</span>
-                <h4>08</h4>
+                <span>{fechaNota.format('dddd')}</span>
+                <h4>{fechaNota.format('Do')}</h4>
             </div>
             
         </div>

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
-import { startRegisterWithEmailPasswordName, startGoogleLogin, inicioLoginEmailContraseña } from '../../acciones/auth';
+import { startGoogleLogin, inicioLoginEmailContraseña } from '../../acciones/auth';
 
  const LoginScreen = () => {
 
@@ -29,7 +29,7 @@ import { startRegisterWithEmailPasswordName, startGoogleLogin, inicioLoginEmailC
 
     return (
         <>
-        <h3 className="auth__title">Login</h3>
+        <h3 className="auth__title">Inicio sesión</h3>
 
         <form onSubmit={ handleLogin }>
 
@@ -58,12 +58,12 @@ import { startRegisterWithEmailPasswordName, startGoogleLogin, inicioLoginEmailC
                 className="btn btn-primary btn-block"
                 disabled={ loading }
             >
-                Login
+                Inicio
             </button>
 
             
             <div className="auth__social-networks">
-                <p>Login with social networks</p>
+                <p>Inicio con redes sociales</p>
 
                 <div 
                     className="google-btn"
@@ -73,16 +73,16 @@ import { startRegisterWithEmailPasswordName, startGoogleLogin, inicioLoginEmailC
                         <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="google button" />
                     </div>
                     <p className="btn-text">
-                        <b>Sign in with google</b>
+                        <b>Inicio con google</b>
                     </p>
                 </div>
             </div>
 
             <Link 
-                to="/auth/register"
+                to="/auth/registro"
                 className="link"
             >
-                Create new account    
+                Crear nueva cuenta    
             </Link>
 
         </form>

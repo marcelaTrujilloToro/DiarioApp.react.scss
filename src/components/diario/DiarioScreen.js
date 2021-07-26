@@ -1,17 +1,26 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { NotaScreen } from '../notas/NotaScreen';
 import { Sidebar } from './Sidebar';
-// import { NadaSeleccionado } from './NadaSeleccionado';
+import { NadaSeleccionado } from './NadaSeleccionado';
 
 const DiarioScreen = () => {
+
+    const {notaActiva} = useSelector(state => state.notas)
+    
+
     return (
         <div className="diario__main-content">
             
             <Sidebar/>
 
             <main>
-                {/* <NadaSeleccionado/> */}
-                <NotaScreen/>
+
+                {
+                    (notaActiva)
+                    ? (<NotaScreen/>)
+                    : (<NadaSeleccionado/>)
+                }
             </main>
 
         </div>
