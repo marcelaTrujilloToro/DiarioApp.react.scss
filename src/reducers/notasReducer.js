@@ -19,11 +19,11 @@ export const notasReducer = (state = estadoInicial, action) => {
                 }
             }
         
-        // case  types.notesAddNew:
-        //     return {
-        //         ...state,
-        //         notas: [ action.payload, ...state.notes ]
-        //     }
+        case  types.notesAddNew:
+            return {
+                ...state,
+                notas: [ action.payload, ...state.notas ]
+            }
 
         case types.notesLoad:
             return {
@@ -31,29 +31,29 @@ export const notasReducer = (state = estadoInicial, action) => {
                 notas: [ ...action.payload ]
             }
     
-        // case types.notesUpdated:
-        //     return {
-        //         ...state,
-        //         notas: state.notes.map(
-        //             note => note.id === action.payload.id
-        //                 ? action.payload.note
-        //                 : note
-        //         )
-        //     }
+        case types.notesUpdated:
+            return {
+                ...state,
+                notas: state.notas.map(
+                    note => note.id === action.payload.id
+                        ? action.payload.note
+                        : note
+                )
+            }
 
-        // case types.notesDelete:
-        //     return {
-        //         ...state,
-        //         notaActiva: null,
-        //         notas: state.notes.filter( note => note.id !== action.payload )
-        //     } 
+        case types.notesDelete:
+            return {
+                ...state,
+                notaActiva: null,
+                notas: state.notas.filter( note => note.id !== action.payload )
+            } 
 
-        // case types.notesLogoutCleaning:
-        //     return {
-        //         ...state,
-        //         notaActiva: null,
-        //         notas: []
-        //     }
+        case types.notesLogoutCleaning:
+            return {
+                ...state,
+                notaActiva: null,
+                notas: []
+            }
 
         default:
             return state

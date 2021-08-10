@@ -6,6 +6,7 @@ import { NadaSeleccionado } from './NadaSeleccionado';
 
 const DiarioScreen = () => {
 
+    //  extraer algo del store (useSelector)
     const {notaActiva} = useSelector(state => state.notas)
     
 

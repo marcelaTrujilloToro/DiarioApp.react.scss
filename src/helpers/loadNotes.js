@@ -10,8 +10,11 @@ export const loadNotas = async (uid) => {
             id:snapHijo.id,
             ...snapHijo.data()
         })
-    })
+    });
 
 
     return notas;
 }
+
+
+//react-diario
