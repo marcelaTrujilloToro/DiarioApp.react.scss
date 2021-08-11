@@ -11,7 +11,7 @@ const DiarioScreen = () => {
     
 
     return (
-        <div className="diario__main-content">
+        <div className="diario__main-content animate__animated animate__fadeIn animate__faster">
             
             <Sidebar/>
 

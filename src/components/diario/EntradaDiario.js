@@ -8,7 +8,7 @@ export const EntradasDiario = () => {
   
         
         return (
-        <div className="diario__entradas">
+        <div className="diario__entradas ">
             {
                 notas?.map(nota =>(
                     <DiarioEntrada 

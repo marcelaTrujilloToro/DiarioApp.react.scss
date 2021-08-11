@@ -17,7 +17,7 @@ export const DiarioEntrada = ({id, fecha, titulo, cuerpo, url}) => {
 
     return (
         <div 
-            className="diario__entrada pointer"
+            className="diario__entrada pointer animate__animated animate__fadeIn animate__faster"
             onClick={handleEntradaClick }    
         >
 
